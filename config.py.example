@@ -1,0 +1,7 @@
+EMAIL = "your-tgtg-email@example.com"
+
+PHONE_NUMBER = "6465551234"   # no dashes
+TEXTBELT_KEY = "your-textbelt-key"
+
+POLL_INTERVALS = [37, 41, 43, 111]  # seconds; randomized each poll for jitter
+CREDENTIALS_FILE = "credentials.json"

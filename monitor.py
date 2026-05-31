@@ -1,8 +1,9 @@
 import json
+import random
 import time
 import requests
 from tgtg import TgtgClient
-from config import PHONE_NUMBER, TEXTBELT_KEY, POLL_INTERVAL, CREDENTIALS_FILE
+from config import PHONE_NUMBER, TEXTBELT_KEY, POLL_INTERVALS, CREDENTIALS_FILE
 
 
 def send_text(message):
@@ -33,7 +34,6 @@ def main():
         access_token=creds["access_token"],
         refresh_token=creds["refresh_token"],
         cookie=creds["cookie"],
-        user_id=creds["user_id"],
     )
 
     last_state = {}
@@ -50,6 +50,9 @@ def main():
                 name = item["display_name"]
                 available = item["items_available"]
 
+                if first_poll:
+                   print(f"* {name}: {available}")
+                   
                 if not first_poll:
                     was = last_state.get(item_id, 0)
                     if available > 0 and was == 0:
@@ -71,7 +74,7 @@ def main():
         except Exception as e:
             print(f"Error: {e}")
 
-        time.sleep(POLL_INTERVAL)
+        time.sleep(random.choice(POLL_INTERVALS))
 
 
 if __name__ == "__main__":

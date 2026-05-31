@@ -1,6 +1,6 @@
 """
 Run once to authenticate with Too Good To Go.
-Check your email, click the magic link, then press Enter here.
+TGTG will email a PIN code to your address; enter it when prompted.
 Saves credentials to credentials.json for use by monitor.py.
 """
 
@@ -10,10 +10,8 @@ from config import EMAIL, CREDENTIALS_FILE
 
 
 def main():
-    print(f"Sending magic link to {EMAIL}...")
+    print(f"Requesting login PIN for {EMAIL}...")
     client = TgtgClient(email=EMAIL)
-
-    input("Check your email, click the magic link, then press Enter here: ")
 
     creds = client.get_credentials()
     with open(CREDENTIALS_FILE, "w") as f:
